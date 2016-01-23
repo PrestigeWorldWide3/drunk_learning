@@ -1,11 +1,9 @@
 import numpy as np
 from sklearn.svm import SVC
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
-from sklearn.linear_model import Perceptron
-from sklearn.linear_model import SGDClassifier
-from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import Perceptron, SGDClassifier, PassiveAggressiveClassifier
+from sklearn.grid_search import GridSearchCV
 from sklearn.metrics import accuracy_score
 from sklearn.externals import joblib
 from sklearn import preprocessing
