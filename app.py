@@ -1,11 +1,15 @@
 from flask import Flask, request, g
 from drunk_learning import DrunkLearningNB, DrunkLearningSVM
+from flask.ext.pymongo import PyMongo
+
 app = Flask(__name__)
+mongo = PyMongo(app)
+
 DrunkLearning = DrunkLearningNB()
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return 'Welcome to Drunk Learning!'
 
 @app.route('/predict', methods=['POST'])
 def send_prediction():
@@ -18,6 +22,7 @@ def log_data():
     # Put data into db
     data = dict(request.get_json())
     print data
+    print mongo.db.games.insert(data)
     return 'OK'
 
 @app.route('/fit', methods=['POST'])
@@ -38,4 +43,4 @@ def partial_fit():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', port=80)
