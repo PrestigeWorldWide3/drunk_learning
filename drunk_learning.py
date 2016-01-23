@@ -26,6 +26,21 @@ class DrunkLearningBatch(object):
     	X = np.array([X])
         ret = self.clf.predict(X)
         return str(ret[0])
+    
+    def grid_search(self, X, y, param_grid):
+    	model = GridSearchCV(estimator=self.clf, param_grid=param_grid, cv=10)
+		model.fit(X, y)
+
+		print("Best parameters set found for Random Forest:")
+		print("")
+		print(model.best_estimator_)
+
+		print("Grid scores:")
+		print()
+		for params, mean_score, scores in model.grid_scores_:
+    		print("%0.3f (+/-%0.03f) for %r"
+        	% (mean_score, scores.std() / 2, params))
+		print("")
 
 class DrunkLearningAdaBoost(DrunkLearningBatch):
     """drunk_learning implementation of AdaBoost"""
